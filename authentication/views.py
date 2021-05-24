@@ -12,14 +12,25 @@ class SignUpView(View):
     template_name = 'signup.html'
     user_form = UserForm
     
+    
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
     
     def post(self, request, *args, **kwargs):
         form = self.user_form(request.POST)
-        breakpoint()
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('home_view')
         
-        return render(request, self.template_name, {'form': form})
+        title = 'register'
+        return render(request, self.template_name, {'form': form, 'title': title})
+    
+class SignInView(View):
+    template_name = 'signin.html'
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+    
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+    
