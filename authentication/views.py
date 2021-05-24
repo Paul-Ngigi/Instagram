@@ -9,23 +9,23 @@ from django.contrib import messages
 # Create your views here.
 User = get_user_model()
 
+
 class SignUpView(View):
     template_name = 'signup.html'
     user_form = UserForm
-    
+
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('home_view')
         return render(request, self.template_name)
-    
+
     def post(self, request, *args, **kwargs):
         form = self.user_form(request.POST)
         if form.is_valid():
             form.save()
             return redirect('signin_view')
-        
+
         return render(request, self.template_name, {'form': form})
-    
 
 
 class SignInView(View):
@@ -47,12 +47,17 @@ class SignInView(View):
             email = email_username
 
         user = authenticate(request, email=email, password=password)
-        
+
         if user is None:
             messages.error(request, 'Invalid Login.', extra_tags="error")
-            return render(request, self.template_name) 
+            return render(request, self.template_name)
 
         login(request, user)
         messages.success(request, 'Thanks for Login, Welcome to Instagram.', extra_tags='success')
         return redirect('home_view')
-        
+
+
+class SignOutView(View):
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('signin_view')

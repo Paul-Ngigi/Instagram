@@ -1,0 +1,59 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<header class="sticky-top">
+    <nav class="navbar navbar-light bg-white border-bottom py-1">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'img/instalogo.png' %}" class="nav__insta__logo">
+            </a>
+            <div class="search__input m-auto d-none d-md-block">
+
+                <!-- Form to search Users -->
+                <form method="GET" action="" class="form-inline">
+                    <input type="text" autocapitalize="none" placeholder="Search" value="" class="form-control"
+                        name="query">
+                    <button type="submit" class="ml-2 btn p-0">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+                <!-- Form to search Users End -->
+
+            </div>
+            <ul class="navbar-nav ml-0 ml-md-auto d-flex flex-row">
+
+                <!-- Home Button -->
+                <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons fa fa-home"></span></a>
+                </li>
+
+                <!-- Explore View Button -->
+                <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                    <a href="" class="text-decoration-none text-reset"><span
+                            class="nav__icons far fa-compass"></span></a>
+                </li>
+
+                <!-- Liked Posts Button -->
+                <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons far fa-heart"></span></a>
+                </li>
+
+                <!-- Profile Button -->
+                <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
+                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons fas fa-user-circle"></span></a>
+                </li>
+
+                <form method="POST" action="{% url 'signout_view' %}">
+                    {% csrf_token %}
+                    <a href="javascript:;" onclick="parentNode.submit();" class="text-reset text-decoration-none">Sign
+                        Out</a>
+                </form>
+
+        </div>
+        </div>
+        </li>
+        </ul>
+        </div>
+    </nav>
+</header>
