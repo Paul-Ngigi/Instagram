@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from user.managers import CustomUserManager
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 
@@ -12,7 +13,7 @@ GENDER_CHOICES = [
 
 
 class User(AbstractUser):
-    picture = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
+    picture = CloudinaryField('profile_picture', blank=True, null=False)
     full_name = models.CharField(max_length=100, help_text='Help people discover your account by using the name you\'re known by: either your full name, nickname, or business name.')
     email = models.EmailField(unique=True)
 
