@@ -11,10 +11,10 @@ class Post(models.Model):
     Class that holds post models
     """
     image = CloudinaryField('post')
-    caption = models.TextField()
+    caption = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    updated_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_on']

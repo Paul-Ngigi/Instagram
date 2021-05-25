@@ -13,7 +13,7 @@
                 <!-- Form to search Users -->
                 <form method="GET" action="{% url 'search_results'%}" class="form-inline">
                     <input type="text" autocapitalize="none" placeholder="Search" value="" class="form-control"
-                        name="profile">
+                           name="profile">
                     <button type="submit" class="ml-2 btn p-0">
                         <i class="fa fa-search"></i>
                     </button>
@@ -25,7 +25,8 @@
 
                 <!-- Home Button -->
                 <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
-                    <a href="{% url 'home_view' %}" class="text-decoration-none text-reset"><span class="nav__icons fa fa-home"></span></a>
+                    <a href="{% url 'home_view' %}" class="text-decoration-none text-reset"><span
+                            class="nav__icons fa fa-home"></span></a>
                 </li>
 
                 <!-- Explore View Button -->
@@ -36,7 +37,8 @@
 
                 <!-- Profile Button -->
                 <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
-                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons fas fa-user-circle"></span></a>
+                    <a href="{% url 'profile' %}" class="text-decoration-none text-reset"><span
+                            class="nav__icons fas fa-user-circle"></span></a>
                 </li>
 
                 <form method="POST" action="{% url 'signout_view' %}">

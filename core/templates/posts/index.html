@@ -1,20 +1,51 @@
 {% extends 'common/base.html' %}
 
-{% block content %}
-    <div class="container mt-5">
-        <div class="row">
-            {% for post in posts %}
-                <div class="card ml-5f">
-                    <div class="card-header">
-                        <p>{{post.user.username}}</p>
+{% block content%}
+{{block.super}}
+<div class="container mt-5">
+    <div class="row mt-5">
+        {% for post in posts %}
+        <div class="col-md-10">
+            <div class="gallery-item">
+                <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
+                    <div class="custom-card-header">
+                        <a href="" style="text-decoration:none ;color: black;">
+                            <p class="username ml-3" style="font-weight: bold; font-style: italic; font-size: large;">
+                                {{post.user.username}}</p>
+                        </a>
                     </div>
+
+                    <img src="{{post.image.url}}" class="gallery-image">
                     <div class="card-body">
-                        <img src="{{post.image.url}}" alt="" height="500" width="500">
-                        <p>{{post.caption}}</p>
+                        <div class="card-footer-section">
+                            <h5 class="card-text username" style="font-size: 23px">{{post.caption}}</h5>
+                            <p class="text-muted card-text username">{{post.post_date}} </p>
+                            {% for comment in comments %}
+                            {% if comment.image.id == post.id %}
+                            <div class="mb-2">
+                                <em style="font-size: 1.2rem; font-weight:bold">{{comment.user}}</em>
+                                <em style="font-size: 1rem;">{{comment.comment}}</em>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 0;">
+                        <form action="">
+                            {% csrf_token%}
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Add a comment..." name="comments"
+                                       style="font-size: 1.1rem; border: 0; padding:1rem">
+                                <div class="input-group-btn">
+                                    <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
+        {% endfor %}
     </div>
-
+</div>
 {% endblock %}

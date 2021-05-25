@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="row mt-5">
         <div class="col-md-12">
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'addpost_view' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="mb-2">{{ field }}</div>
