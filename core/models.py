@@ -67,6 +67,12 @@ class Like(models.Model):
     def __str__(self):
         return str(self.is_like)
 
+    def save_like(self):
+        self.save()
+
+    def delete_like(self):
+        self.delete()
+
 
 class Follow(models.Model):
     """

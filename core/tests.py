@@ -81,3 +81,37 @@ class TestCommentClass(TestCase):
 
         self.new_comment.delete_comment()
         self.assertTrue(len(comments) < 1)
+
+
+class LikeTestClass(TestCase):
+    """
+    Test class to test like class properties
+    """
+
+    # Setup
+    def setUp(self) -> None:
+        self.new_user = User(full_name='Paul Ngigi', email='paul@gmail.com')
+        self.new_user.save()
+
+        self.new_post = Post(user=self.new_user, image='default.png', caption='cool pic')
+        self.new_post.save()
+
+        self.new_like = Like(user=self.new_user, post=self.new_post, is_like=True)
+
+    # Test instance
+    def test_instance(self):
+        self.assertTrue(self.new_like, Like)
+
+    # Testing saving like
+    def test_save_like(self):
+        self.new_like.save_like()
+        likes = Like.objects.all()
+        self.assertTrue(len(likes) > 0)
+
+    # Testing deleting like
+    def test_delete_like(self):
+        self.new_like.save_like()
+        likes = Like.objects.all()
+
+        self.new_like.delete_like()
+        self.assertTrue(len(likes) < 1)
