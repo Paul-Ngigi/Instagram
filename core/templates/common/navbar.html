@@ -25,18 +25,13 @@
 
                 <!-- Home Button -->
                 <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
-                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons fa fa-home"></span></a>
+                    <a href="{% url 'home_view' %}" class="text-decoration-none text-reset"><span class="nav__icons fa fa-home"></span></a>
                 </li>
 
                 <!-- Explore View Button -->
                 <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
-                    <a href="" class="text-decoration-none text-reset"><span
-                            class="nav__icons far fa-compass"></span></a>
-                </li>
-
-                <!-- Liked Posts Button -->
-                <li class="nav-item px-md-3 px-2 d-flex flex-column justify-content-center">
-                    <a href="" class="text-decoration-none text-reset"><span class="nav__icons far fa-heart"></span></a>
+                    <a href="{% url 'addpost_view' %}" class="text-decoration-none text-reset"><span
+                            class="nav__icons fas fa-plus-circle"></span></a>
                 </li>
 
                 <!-- Profile Button -->

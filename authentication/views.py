@@ -53,7 +53,7 @@ class SignInView(View):
             return render(request, self.template_name)
 
         login(request, user)
-        messages.success(request, 'Thanks for Login, Welcome to Instagram.', extra_tags='success')
+        messages.success(request, 'Welcome to Instagram.', extra_tags='success')
         return redirect('home_view')
 
 
