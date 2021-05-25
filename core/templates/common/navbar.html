@@ -11,9 +11,9 @@
             <div class="search__input m-auto d-none d-md-block">
 
                 <!-- Form to search Users -->
-                <form method="GET" action="" class="form-inline">
+                <form method="GET" action="{% url 'search_results'%}" class="form-inline">
                     <input type="text" autocapitalize="none" placeholder="Search" value="" class="form-control"
-                        name="query">
+                        name="profile">
                     <button type="submit" class="ml-2 btn p-0">
                         <i class="fa fa-search"></i>
                     </button>
