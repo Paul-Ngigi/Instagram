@@ -9,11 +9,19 @@ from .forms import PostCreateForm
 # Create your views here.
 class Home(View):
     template_name = 'posts/index.html'
+
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        context = {'posts': posts}
+
+        return render(request, self.template_name, context)
+    
+class AddPost(View):
+    template_name = 'posts/add-post.html'
     form = PostCreateForm
 
     def get(self, request, *args, **kwargs):
         form = self.form()
-        posts = Post.objects.all()
-        context = {'form': form, 'posts': posts}
+        context = {'form': form}
 
         return render(request, self.template_name, context)
