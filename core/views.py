@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from .models import Post, Comment, Like, Follow
-from django.contrib.auth import get_user_model
+from .models import Post, Comment
 from .forms import PostCreateForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
@@ -71,3 +69,4 @@ def comment(request, pk):
             comment.post = post
 
             return redirect('home_view')
+
