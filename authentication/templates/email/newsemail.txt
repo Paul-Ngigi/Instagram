@@ -1,3 +1,0 @@
-Hello {{name}}
-
-Welcome to Instagram. Find exiting photos and meet other people.
