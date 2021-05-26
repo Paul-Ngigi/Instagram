@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Post, Comment
-from .forms import PostCreateForm, CommentForm
+from django.http import HttpResponseRedirect
+from .models import Post, Comment, Like
+from .forms import PostCreateForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 # Create your views here.
@@ -10,8 +14,9 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     posts = Post.objects.all()
     comments = Comment.objects.all()
+    likes = Like.objects.all()
 
-    return render(request, 'posts/index.html', {'posts': posts, 'comments': comments})
+    return render(request, 'posts/index.html', {'posts': posts, 'comments': comments, 'likes': likes})
 
 
 @login_required
@@ -58,15 +63,31 @@ def profile(request):
 
 @login_required
 def comment(request, pk):
-    post = Post.objects.get(id=id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST, request.FILES)
-        if form.is_valid():
-            comment = Comment(user=request.user,
-                              comment=form.cleaned_data.get('text'))
-            comment.save()
-            comment.user = request.user
-            comment.post = post
+    post = Post.objects.get(pk=pk)
+    comments = request.GET.get('comments')
+    
+    current_user = request.user
+    comment = Comment(user=current_user, post=post, text=comments)
+    
+    # Saving comment
+    comment.save()
+    print(comment)
+    
+    return redirect('home_view')
 
-            return redirect('home_view')
 
+@login_required
+def like(request,pk):
+    current_user = request.user
+    likes = Like.objects.filter(user=current_user).first()
+    if likes is None:
+        image = Post.objects.get(pk=pk)
+        current_user = request.user
+        user_likes = Like(user=current_user,post=image)
+        user_likes.save()
+        return redirect('home_view')
+    else:
+        likes.delete()
+        return redirect('home_view')
+    
+    

@@ -3,7 +3,6 @@ from django.views.generic import View
 from .forms import UserForm, CustomUserChangeForm
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib import messages
-from .email import send_welcome_email
 
 # Create your views here.
 User = get_user_model()
@@ -21,6 +20,7 @@ class SignUpView(View):
     def post(self, request, *args, **kwargs):
         form = self.user_form(request.POST)
         if form.is_valid():
+            form.save()
             
             return redirect('signin_view')
 
