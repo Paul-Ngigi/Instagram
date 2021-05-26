@@ -12,7 +12,7 @@ class Post(models.Model):
     """
     image = CloudinaryField('post')
     caption = models.TextField(blank=True)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='user_posts')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
 

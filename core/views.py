@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Post, Comment, Like, Follow
 from django.contrib.auth import get_user_model
-from .forms import PostCreateForm
+from .forms import PostCreateForm, CommentForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,8 +11,9 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     posts = Post.objects.all()
+    comments = Comment.objects.all()
 
-    return render(request, 'posts/index.html', {'posts': posts})
+    return render(request, 'posts/index.html', {'posts': posts, 'comments': comments})
 
 
 @login_required
@@ -51,7 +52,22 @@ def search_user(request):
 
 
 @login_required
-def profile(request, user_id):
-    posts = Post.objects.get(id=user_id)
+def profile(request):
+    posts = Post.objects.filter(user_id=request.user)
 
-    return render(request, 'posts/profile.html', {'posts': posts})
+    return render(request, 'posts/profile.html', {"posts": posts})
+
+
+@login_required
+def comment(request, pk):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = Comment(user=request.user,
+                              comment=form.cleaned_data.get('text'))
+            comment.save()
+            comment.user = request.user
+            comment.post = post
+
+            return redirect('home_view')

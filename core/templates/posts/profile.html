@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6">
+            {% if request.user.picture %}
+            <img src="{{request.user.picture.url}" alt="" width="150" height="150" style="border-radius: 50%;">
+            {% else %}
+            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png" alt="" width="150"
+                 height="150" style="border-radius: 50%;">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>{{request.user.username}}</h3>
+                </div>
+                <div class="col-md-2">
+                    <h3>Follow</h3>
+                    <h3 class="text-center">0</h3>
+                </div>
+                <div class="col-md-2">
+                    <h3>Followers</h3>
+                    <h3 class="text-center">0</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr class="mt-5">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{post.image.url}}" alt="" height="250" width="300">
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
