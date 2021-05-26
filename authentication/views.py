@@ -21,11 +21,7 @@ class SignUpView(View):
     def post(self, request, *args, **kwargs):
         form = self.user_form(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['your_name']
-            email = form.cleaned_data['email']
-
-            send_welcome_email(name, email)
-            form.save()
+            
             return redirect('signin_view')
 
         return render(request, self.template_name, {'form': form})
