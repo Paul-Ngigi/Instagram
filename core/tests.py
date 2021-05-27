@@ -96,7 +96,7 @@ class LikeTestClass(TestCase):
         self.new_post = Post(user=self.new_user, image='default.png', caption='cool pic')
         self.new_post.save()
 
-        self.new_like = Like(user=self.new_user, post=self.new_post, is_like=True)
+        self.new_like = Like(user=self.new_user, post=self.new_post, like=23)
 
     # Test instance
     def test_instance(self):
